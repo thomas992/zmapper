@@ -50,7 +50,7 @@ using namespace tb;
 using namespace tb::ui;
 
 static_assert(
-  QT_VERSION >= QT_VERSION_CHECK(6, 8, 0), "TrenchBroom requires Qt 6.8.0 or later");
+  QT_VERSION >= QT_VERSION_CHECK(6, 8, 0), "zmapper requires Qt 6.8.0 or later");
 
 extern void qt_set_sequence_auto_mnemonic(bool b);
 
@@ -128,15 +128,15 @@ void loadStyle(QApplication& app)
   // the menu bar (https://github.com/TrenchBroom/TrenchBroom/issues/3140), so the
   // following QProxyStyle disables that completely.
 
-  class TrenchBroomProxyStyle : public QProxyStyle
+  class ZMapperProxyStyle : public QProxyStyle
   {
   public:
-    explicit TrenchBroomProxyStyle(const QString& key)
+    explicit ZMapperProxyStyle(const QString& key)
       : QProxyStyle{key}
     {
     }
 
-    explicit TrenchBroomProxyStyle(QStyle* style = nullptr)
+    explicit ZMapperProxyStyle(QStyle* style = nullptr)
       : QProxyStyle{style}
     {
     }
@@ -156,14 +156,14 @@ void loadStyle(QApplication& app)
   // Apply either the Fusion style + dark palette, or the system style
   if (pref(Preferences::Theme) == Preferences::DarkTheme)
   {
-    app.setStyle(new TrenchBroomProxyStyle{"Fusion"});
+    app.setStyle(new ZMapperProxyStyle{"Fusion"});
     app.setPalette(darkPalette());
     app.styleHints()->setColorScheme(Qt::ColorScheme::Dark);
   }
   else
   {
     // System
-    app.setStyle(new TrenchBroomProxyStyle{});
+    app.setStyle(new ZMapperProxyStyle{});
   }
 }
 
@@ -174,7 +174,7 @@ auto createAppController()
              fmt::format(R"(Game configurations could not be loaded: {})", e.msg);
 
            QMessageBox::critical(
-             nullptr, "TrenchBroom", QString::fromStdString(msg), QMessageBox::Ok);
+             nullptr, "zmapper", QString::fromStdString(msg), QMessageBox::Ok);
            QCoreApplication::exit(1);
          })
          | kdl::value();
@@ -309,11 +309,11 @@ int main(int argc, char* argv[])
   }
 
   // Needs to be set before creating the preference manager
-  QApplication::setApplicationName("TrenchBroom");
+  QApplication::setApplicationName("zmapper");
   // Needs to be "" otherwise Qt adds this to the paths returned by QStandardPaths
   // which would cause preferences to move from where they were with wx
   QApplication::setOrganizationName("");
-  QApplication::setOrganizationDomain("io.github.trenchbroom");
+  QApplication::setOrganizationDomain("io.github.zmapper");
 
   // QApplication must be created before QPreferenceStore because QPreferenceStore uses
   // QFileSystemWatcher, which requires a QApplication instance

@@ -26,14 +26,14 @@ set(CMAKE_VISIBILITY_INLINES_HIDDEN TRUE)
 # Enable the source_group command for creating IDE folders
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# Set TrenchBroom item as default single startup project (NOTE: CMake 3.6 and newer)
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT TrenchBroom)
+# Set zmapper item as default single startup project (NOTE: CMake 3.6 and newer)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT zmapper)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-project(TrenchBroom C CXX)
+project(zmapper C CXX)
 
 # Configure CCache if available and requested
 if(TB_ENABLE_CCACHE)
@@ -125,7 +125,7 @@ get_app_version_str(APP_VERSION_YEAR APP_VERSION_NUMBER APP_VERSION_RC APP_VERSI
 set(APP_BUILD_TYPE "${CMAKE_BUILD_TYPE}")
 
 # Some global variables used in several targets
-set(TB_RESOURCE_DIR "${CMAKE_SOURCE_DIR}/app/TrenchBroom/resources")
+set(TB_RESOURCE_DIR "${CMAKE_SOURCE_DIR}/app/zmapper/resources")
 
 add_subdirectory(lib)
 add_subdirectory(app)
